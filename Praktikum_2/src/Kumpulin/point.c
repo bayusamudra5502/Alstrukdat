@@ -133,8 +133,10 @@ float Jarak0(POINT P) {
 float Panjang(POINT P1, POINT P2) {
   /* Menghitung jarak terpendek antara dua titik P1 dan P2 */
 
-  return sqrt(pow(Absis(P1) - Absis(P2), 2.0) +
-              pow(Ordinat(P1) - Ordinat(P2), 2.0));
+  float dx = Absis(P1) - Absis(P2);
+  float dy = Ordinat(P1) - Ordinat(P2);
+
+  return sqrt(dx * dx + dy * dy);
 }
 
 void Geser(POINT *P, float deltaX, float deltaY) {

@@ -1,3 +1,10 @@
+/* File: main_time.c */
+/* Tanggal: 31 Agustus 2021 */
+// Driver ADT Jam
+
+// Nama : Bayu Samudra
+// NIM : 13520128
+
 #include <stdio.h>
 
 #include "time.h"
