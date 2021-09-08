@@ -1,9 +1,12 @@
-/* File: point.h */
-/* Tanggal: 1 September 2020 */
-/* *** Implementasi ABSTRACT DATA TYPE POINT *** */
-
-// Nama : Bayu Samudra
-// NIM : 13520128
+/* File    : point.c
+ * Tanggal : ... 
+ * Nama	   : Bayu Samudra
+ * NIM     : 13520128
+ * Topik   : ...
+ *
+ * Implementasi ABSTRACT DATA TYPE POINT 
+ *
+*/
 
 #include "point.h"
 

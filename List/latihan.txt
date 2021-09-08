@@ -1,0 +1,66 @@
+function isSimetris(l: List) -> boolean
+  { Menerima  list l yang merupakan ... }
+
+  KAMUS LOKAL
+    i, j : integer
+    simetris: boolean
+
+  ALGORITMA
+    if isEmpty(l) then
+      -> true
+    else
+      simetris <- true
+      j <- length(l) - 1
+      i <- 0
+
+      while ((simetris) and (i < j)) do
+        if (l.content[i] != l.content[j]) then
+          simetris <- false
+        
+        j <- j - 1
+        i <- i + 1
+      
+      -> simetris
+
+function isEqual(l1, l2: List) -> boolean
+  KAMUS LOKAL
+    i : integer
+    equal : boolean
+  
+  ALGORITMA
+    i <- 0
+    equal <- true
+
+    while equal do
+      if(l1.contents[i] != l2.content[i]) then
+        equal <- false
+      
+      i <- i + 1
+    
+    -> equal
+
+procedure insertUnique(input/output l:List, input c:ElType)
+  KAMUS LOKAL
+    i : integer
+
+  ALGORITMA
+    if isEmpty(l) then
+      l.contents[0] <- c
+    else
+      i <- 0
+      l.contents[l.Neff] <- c
+
+      while (l.contents[i] != c) do
+        i <- i + 1
+
+      if (i = l.Neff) then
+        l.Neff <- l.Neff + 1
+
+{ === }
+
+function getFirstIdx(l: List)
+  KAMUS LOKAL
+
+  ALGORITMA
+    -> l.firstIdx
+  

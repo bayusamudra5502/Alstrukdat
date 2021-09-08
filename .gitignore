@@ -1,8 +1,8 @@
-*
-
 !.gitignore
 !*.*
 !*/
 
 dist/
 bin/
+build/
+
