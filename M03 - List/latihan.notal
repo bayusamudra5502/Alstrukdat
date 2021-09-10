@@ -64,3 +64,44 @@ function getFirstIdx(l: List)
   ALGORITMA
     -> l.firstIdx
   
+
+function diff(a,b:integer)
+  KAMUS LOKAL
+
+  ALGORITMA
+  if a > b then
+    -> a - b
+  else
+    -> b - a
+
+procedure closestPair(input l:List; output p1,p2: ElType)
+  KAMUS LOKAL
+    i,j, mindiff : integer
+
+  ALGORITMA
+    mindiff <- -1
+
+    i tranversal [0..length(l)]
+      j tranversal [i+1..length(l)]
+        if (diff(getElmt(l, i), getElmt(l, j)) < mindiff) or mindiff = -1 then
+          mindiff <- diff(getElmt(l, i), getElmt(l, j))
+          p1 <- getElmt(l, i)
+          p2 <- getElmt(l, j)
+
+{ === }
+
+function countOccurence(l: list, x: ElType) -> integer
+  KAMUS LOKAL
+    cnt: integer
+
+  ALGORITMA
+    if isEmpty(l) then
+      -> 0
+    else
+      cnt <- 0
+
+      i tranversal [0..length(l)-1]
+        if (getElmt(l, i) = x) then
+          cnt <- cnt + 1
+      
+      -> cnt

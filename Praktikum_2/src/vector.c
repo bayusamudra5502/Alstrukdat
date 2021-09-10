@@ -1,5 +1,6 @@
 #include "vector.h"
 
+#include <math.h>
 #include <stdio.h>
 
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */
@@ -26,8 +27,8 @@ void TulisVector(VECTOR v) {
 /* *** KELOMPOK OPERASI LAIN TERHADAP TYPE *** */
 float Magnitude(VECTOR v) {
   /* Menghasilkan magnitudo dari vector, yakni sqrt(v.x^2+v.y^2) */
-  return (AbsisComponent(v) * AbsisComponent(v) +
-          OrdinatComponent(v) * OrdinatComponent(v));
+  return sqrt(AbsisComponent(v) * AbsisComponent(v) +
+              OrdinatComponent(v) * OrdinatComponent(v));
 }
 
 VECTOR Add(VECTOR a, VECTOR b) {

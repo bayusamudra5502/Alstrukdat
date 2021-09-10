@@ -15,7 +15,7 @@ BIN_OBJ = $(patsubst %.c,build/%.o,$(BIN_SRC))
 TESTING_FILE = $(wildcard test/**/*.c) $(wildcard test/*.c)
 TESTING_OBJ = $(patsubst %.c,build/%.o,$(TESTING_FILE))
 
-NMAIN_SRC = $(shell find test -name "*.c")
+NMAIN_SRC = $(shell find src -name "*.c" -and ! -name "m*" )
 NMAIN_OBJ = $(patsubst %.c,build/%.o,$(NMAIN_SRC))
 
 # SOURCE CODE TO OBJECT FILE
@@ -34,6 +34,9 @@ NMAIN_OBJ = $(patsubst %.c,build/%.o,$(NMAIN_SRC))
 clear:
 	@rm -rf build/* bin/*
 
+./bin/%: $(BUILD_SRC)/m%.o $(BUILD_SRC)/%.o
+	@$(CC) $^ -o $@ $(BUILD_FLAG)
+
 ./bin/%: $(BUILD_SRC)/main_%.o $(BUILD_SRC)/%.o
 	@$(CC) $^ -o $@ $(BUILD_FLAG)
 	
@@ -43,7 +46,6 @@ clear:
 
 test: ./bin/test
 	@./bin/test
-
 
 ./bin/garis: $(BUILD_SRC)/main_garis.o $(BUILD_SRC)/garis.o $(BUILD_SRC)/point.o
 	@$(CC) $^ -o $@ $(BUILD_FLAG)

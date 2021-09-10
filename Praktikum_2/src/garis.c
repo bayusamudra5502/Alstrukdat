@@ -1,9 +1,10 @@
 #include "garis.h"
 
+#include <float.h>
 #include <math.h>
 #include <stdio.h>
 
-#define FLOAT_EPS 5e-7
+#define FLOAT_EPS FLT_EPSILON
 
 void MakeGARIS(POINT P1, POINT P2, GARIS* L) {
   /* I.S. P1 dan P2 terdefinisi */
@@ -78,7 +79,11 @@ float Gradien(GARIS L) {
   float dx = Absis(p1) - Absis(p2);
   float dy = Ordinat(p1) - Ordinat(p2);
 
-  return dy / dx;
+  if (dy == 0) {
+    return 0;
+  } else {
+    return dy / dx;
+  }
 }
 void GeserGARIS(GARIS* L, float deltaX, float deltaY) {
   /* I.S. L terdefinisi */

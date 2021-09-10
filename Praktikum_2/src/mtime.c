@@ -43,8 +43,12 @@ int main() {
     }
   }
 
-  TulisTIME(min);
-  TulisTIME(max);
+  // TulisTIME(min);
+  // printf("\n");
+  // TulisTIME(max);
+  // printf("\n");
+  printf("%d:%d:%d\n", Hour(min), Minute(min), Second(min));
+  printf("%d:%d:%d\n", Hour(max), Minute(max), Second(max));
 
   return 0;
 }

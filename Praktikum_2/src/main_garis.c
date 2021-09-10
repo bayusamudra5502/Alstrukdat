@@ -8,8 +8,12 @@ int main() {
   POINT p1 = MakePOINT(7, 10);
   POINT p2 = MakePOINT(10, 14);
 
-  GARIS g1;
+  POINT p30 = MakePOINT(0, 0);
+  POINT p40 = MakePOINT(5, 0);
+
+  GARIS g1, g0;
   MakeGARIS(p1, p2, &g1);
+  MakeGARIS(p30, p40, &g0);
 
   TulisGARIS(g1);
   // printf("\n\n");
@@ -23,6 +27,7 @@ int main() {
 
   printf("\n%.2f\n", PanjangGARIS(g1));
   printf("Gradien : %f \n", Gradien(g1));
+  printf("Gradien 2 : %f \n", Gradien(g0));
 
   GeserGARIS(&g1, 3, -2);
   TulisGARIS(g1);

@@ -7,10 +7,11 @@
 
 #include "point.h"
 
+#include <float.h>
 #include <math.h>
 #include <stdio.h>
 
-#define FLOAT_EPS 5e-7
+#define FLOAT_EPS FLT_EPSILON
 
 /* *** IMPLEMENTASI FUNGSI *** */
 /* *** Konstruktor membentuk POINT *** */
@@ -180,7 +181,7 @@ void Putar(POINT *P, float Sudut) {
   /* I.S. P terdefinisi. Sudut dalam radian */
   /* F.S. P digeser sebesar Sudut derajat dengan sumbu titik (0,0) */
   const double PI = acos(-1);
-  const double sudutRad = -PI * Sudut / 180;
+  const double sudutRad = PI * Sudut / 180;
 
   const double sine = sin(sudutRad);
   const double cosine = cos(sudutRad);

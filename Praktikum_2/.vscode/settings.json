@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.js": "javascript",
+    "limits.h": "c",
+    "float.h": "c"
+  }
+}
