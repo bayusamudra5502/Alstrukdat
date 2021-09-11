@@ -1,5 +1,5 @@
 # Alstrukdat
-Catatanku mengenai alstrukdat
+Catatanku mengenai alstrukdat. Semoga Bermanfaat.
 
 ## Struktur Modul
 Gunkana struktur seperti berikut
