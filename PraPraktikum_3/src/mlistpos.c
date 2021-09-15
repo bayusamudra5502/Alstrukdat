@@ -3,4 +3,9 @@
 
 #include "listpos.h"
 
-int main() { return 0; }
+int main() {
+    ListPos a;
+    CreateListPos(&a);
+
+    return 0;
+}
