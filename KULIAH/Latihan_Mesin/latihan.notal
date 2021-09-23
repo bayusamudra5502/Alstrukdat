@@ -1,0 +1,71 @@
+program HitungLE
+
+KAMUS
+  cnt: integer
+  s: integer
+
+ALGORITMA
+  cnt <- 0
+  s <- 0
+
+  while(cc != MARK) do
+    if(cc = "L" and s = 0) then
+      s <- s+1
+    else if(cc = "E" and s = 1) then
+      cnt <- cnt + 1
+      s <- 0
+    else
+      s <- 0
+    
+    adv()
+  
+  output(cnt)
+
+{ === }
+
+function isKataEqual(k1, k2: Kata) -> boolean
+  KAMUS LOKAL
+    i: integer
+    isEq: boolean
+
+  ALGORITMA
+    if(k1.length = k2.length) then
+      isEq <- true
+
+      while(isEq and i < k1.length) do
+        if(k1.buffer[i] != k2.buffer[i]) then
+          isEq <- false
+        
+        i <- i + 1
+      
+      -> isEq
+    else
+      -> false
+
+{ === }
+
+program cariJumlahKataPertama
+
+
+KAMUS
+  use MesinKata2
+
+  firstKata: Kata
+  cnt: integer
+
+ALGORITMA
+  cnt <- 0
+  startKata
+
+  if currentKata.length != 0 then
+    firstKata <- currentKata
+
+    while currentKata.length != 0 do
+      advKata
+
+      if isKataEqual(firstKata, currentKata) then
+        cnt <- cnt + 1
+  
+    output(cnt)
+  else
+    output("Tidak ada kata yang tersedia")
