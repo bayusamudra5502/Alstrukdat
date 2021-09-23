@@ -41,13 +41,16 @@ clear:
 # 	@echo "Mode tanpa ADT"
 # 	@$(CC) $^ -o $@ $(BUILD_FLAG)
 
+./bin/submatrix: $(BUILD_SRC)/submatrix.o $(BUILD_SRC)/matrix.o
+	@$(CC) $^ -o $@ $(BUILD_FLAG)
+
 ./bin/%: $(BUILD_SRC)/m%.o $(BUILD_SRC)/%.o
 	@$(CC) $^ -o $@ $(BUILD_FLAG)
 
 ./bin/%: $(BUILD_SRC)/main_%.o $(BUILD_SRC)/%.o
 	@$(CC) $^ -o $@ $(BUILD_FLAG)
 
-./bin/test: ${TESTING_OBJ} $(NMAIN_OBJ)
+./bin/test: ${TESTING_OBJ} $(NMAIN_OBJ) ./build/src/matrix.o
 	@$(CC) $^ -o $@ $(BUILD_FLAG) $(TEST_FLAG)
 
 test: clean ./bin/test
@@ -57,7 +60,7 @@ tc:
 	@project add tc
 
 adt:
-	@project add adt
+	@project add 
 
 %: ./bin/%
 	@./$<

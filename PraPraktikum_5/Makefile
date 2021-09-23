@@ -47,7 +47,7 @@ clear:
 ./bin/%: $(BUILD_SRC)/main_%.o $(BUILD_SRC)/%.o
 	@$(CC) $^ -o $@ $(BUILD_FLAG)
 
-./bin/test: ${TESTING_OBJ} $(NMAIN_OBJ)
+./bin/test: ${TESTING_OBJ} $(NMAIN_OBJ) ./build/src/matrix.o
 	@$(CC) $^ -o $@ $(BUILD_FLAG) $(TEST_FLAG)
 
 test: clean ./bin/test

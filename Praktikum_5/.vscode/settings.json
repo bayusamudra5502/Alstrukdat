@@ -1,7 +1,7 @@
 {
   "files.associations": {
     "*.js": "javascript",
-    "stdlib.h": "c",
+    "test.h": "c",
     "matrix.h": "c"
   }
 }

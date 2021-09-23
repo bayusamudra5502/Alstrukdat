@@ -1,0 +1,79 @@
+function fibbonaci(n: integer) -> integer
+  KAMUS LOKAL
+
+  ALGORITMA
+    if n = 0 then
+      -> 0
+    else if n = 1 then
+      -> 1
+    else
+      -> fibbonaci(n-1) + fibbonaci(n-2)
+
+{ == }
+
+function deretSegitiga(n: integer) -> integer
+  KAMUS LOKAL
+
+  ALGORITMA
+    if n = 1 then
+      -> 1
+    else
+      -> n + deretSegitiga(n-1)
+
+{ == }
+
+function max(l: List, startIdx: integer) -> ElType
+  KAMUS LOKAL
+    lastMax: ElType
+
+  ALGORITMA
+    if startIdx = l.nEff - 1 then
+      -> l.contents[startIdx]
+    else
+      lastMax <- nilaiMaksimum(l, startIdx + 1)
+
+      if lastMax < l.contents[startIdx] then
+        -> l.contents[startIdx]
+      else
+        -> lastMax
+
+{ == }
+
+procedure search(input x: integer, input l: List, input startIdx: integer,
+                 output idx: integer, output found: boolean)
+  KAMUS LOKAL
+
+  ALGORITMA
+    if startIdx = l.nEff - 1 then
+      if l.contents[startIdx] = x then
+        idx <- startIdx
+        found <- true
+      else
+        idx <- idxUndef
+        found <- false
+    else
+      search(x, l, startIdx + 1, idx, found)
+
+      if l.contents[startIdx] = x then
+        idx <- startIdx
+        found <- true
+
+{ == }
+
+procedure addX (input/output l: List, input x: integer)
+  KAMUS LOKAL
+
+  ALGORITMA
+    addXRec(l, x, 0)
+
+procedure addXRec(input/output l: List, input x: integer, input startIdx: integer)
+  KAMUS LOKAL
+
+  ALGORITMA
+    if startIdx = l.nEff - 1 then
+      l.nEff <- l.nEff + 1
+    else
+      addXRec(l, x, startIdx + 1) { REKURENS }
+
+    l.contents[startIdx + 1] <- l.contents[startIdx]
+    l.contents[startIdx] <- x

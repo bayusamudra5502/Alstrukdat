@@ -1,0 +1,67 @@
+{ →←↑≠≤≥ }
+
+{ SESI A }
+
+function getFirstIdx(l : List) → integer
+  KAMUS LOKAL
+
+  ALGORITMA
+    → 0
+
+function getLastIdx(l : List) → integer
+  KAMUS LOKAL
+  
+  ALGORITMA
+    → l.Neff - 1
+
+procedure deleteAt(input/output L:List, input idx:integer, output value:ElType)
+  KAMUS LOKAL
+    i : integer
+
+  ALGORITMA
+    value ← getElmt(L, idx)
+    
+    if idx = L.Neff - 1 then
+      L.Neff ← L.Neff - 1
+    else
+      i traversal [idx..getLastIdx(L)-1]
+        setElmt(L, i, getElmt(L, i+1))
+      
+      L.Neff ← L.Neff - 1
+
+function isFull(L : list) → boolean
+  KAMUS LOKAL
+
+  ALGORITMA
+    → L.Neff = NMAX
+
+{ SESI B }
+procedure removeAllX(input/output L: list, input X: ElType)
+  KAMUS LOKAL
+    i,j : integer
+
+  ALGORITMA
+    i tranversal [0..getLastIdx(L1)]
+      if getElmt(L, i) = X then
+        { Menghapus Elemen }
+        deleteAt(L, i)
+
+
+function isAllLessThen(L1,L2 :List) → boolean
+  KAMUS LOKAL
+    i: integerdiv
+    res: boolean
+
+  ALGORITMA
+    res ← true
+
+    if not isEmpty(L1) then
+      i ← getFirstIdx(L1)
+
+      while (i ≤ getLastIdx(L1) and res) do
+        if not isLessThen(getElmt(L1,i), L2) then
+          res ← false
+        else
+          i ← i + 1
+
+    → res

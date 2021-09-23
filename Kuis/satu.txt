@@ -1,0 +1,127 @@
+{ →←↑≠≤≥ }
+
+{ Soal 1 }
+
+type Location : <
+                longtitude: real,
+                latitudde: real,
+                name: string
+              >
+
+{ Konstruktor }
+procedure CreateLocation(
+    output loc; input latitude, 
+    longtitude: real; input name: string)
+  { Membuat ADT Konstruktor. Diasumsikan latitude dan longtitude dalam
+  satuan derajat. }
+
+{ Selektor }
+{ Getter }
+function getLongtitude(loc: Location) → real
+  { Menghasilkan longtitude dari sebuah lokasi.
+    I.S. Lokasi loc sudah terdefinisi }
+
+function getLatitude(loc: Location) → real
+  { Menghasilkan latitude dari sebuah lokasi.
+    I.S. Lokasi loc sudah terdefinisi}
+
+function getLocationName(loc: Location) → string
+  { Menghasilkan nama dari sebuah lokasi
+    I.S. Lokasi loc sudah terdefinisi }
+
+{ Setter }
+procedure setLongtitude(input/output loc: Location, 
+                        input longtitude: real)
+  { Mengatur Longtitude dari sebuah lokasi Diasumsikan lokasi sudah
+    terdefinisi }
+
+procedure setLatitude(input/output loc: Location, 
+                        input latitudde: real)
+  { Mengatur Longtitude dari sebuah lokasi Diasumsikan lokasi sudah
+    terdefinisi }
+
+procedure setName(input/output loc: Location, 
+                        input name: string)
+  { Mengatur Longtitude dari sebuah lokasi Diasumsikan lokasi sudah
+    terdefinisi }
+
+{ Input/Output }
+procedure readLocation(output loc: Location)
+  { Membaca masukan dari keyboard 
+  I.S. Sembarnag
+  F.S. terbentuk loc dari lokasi yang diinputkan }
+
+procedure writeLocation(input loc: Location)
+  { Menuliskan masukan ke layar }
+
+{ Properti }
+function isInEquator(loc: Location) → boolean
+  { Memberikan nilai true bila loc ada di katulistiwa.
+  I.S. loc sudah terdefinisi }
+
+function isUniversalTimeLocation(loc: Location) → boolean
+  {I.S. loc telah terdefinisi 
+  F.S. Memberikan nilai true bila loc ada di derajat 0 garis bujur}
+
+{ Operasi }
+function jarakHaversin(loc1, loc2: Location) → real
+  { Menghitung Jarak harversin dari dua buah lokasi.
+  I.S. loc1 dan loc2 sudah terdefinisi
+  F.S. Jarak antara dua daerah dalam kilometer }
+
+function latitudeDifference(loc1, loc2: Location) → real
+  { Menghitung selisih latitude untuk loc1 dan loc2.
+  I.S. Loc1 dan loc 2 terdefinisi 
+  F.S. Beda derajat latitude }
+
+function longtitudeDifference(loc1, loc2: Location) → real
+  { Menghitung selisih longtitude antara dua titik
+  I.S. Loc1 dan loc 2 terdefinisi
+  F.S. Beda derajang longtitude }
+
+function isSameZoneTime(loc1, loc2: Location) → boolean
+  {I.S. loc1 dan loc2 terdefinisi
+  F.S. menghasilkan true bila loc1 dan loc2 berada di zona waktu yang sama 
+  
+  Zona waktu yang sama yaitu saat lokasi memiliki beda longtitude kurang dari 15}
+
+function getTimeZone(loc: Location) → integer
+  { I.S. loc terdefinisi 
+    F.S. Menghasilkan timezone dari lokasi loc. Lokasi dihitung dengan rumus
+    
+    timezone = floor(longtitude / 15)
+  }
+
+{ ==== }
+{ SOAL B }
+
+procedure CreateLocation(
+    output loc; input latitude, 
+    longtitude: real; input name: string)
+  KAMUS LOKAL
+    hasil : Location
+
+  ALGORITMA
+    hasil.longtitude ← longtitude
+    hasil.latitudde ← latitudde
+    hasil.name ← name
+
+    loc ← hasil
+
+
+function isInEquator(loc: Location) → boolean
+  KAMUS LOKAL
+
+  ALGORITMA
+  → loc.latitude = 0
+
+function jarakHaversin(loc1, loc2: Location) → real
+  KAMUS LOKAL
+
+  ALGORITMA
+
+  → 2 × 6371 ×inversSin(sqrt((sin((lat2–lat1)/2)) ^ 2 + cos(lat1) × cos(lat2) × (sin((lon2–lon1)/2)) ^ 2 ))
+
+function latitudeDifference(loc1, loc2: Location) → real
+  { Menghitung selisih latitude untuk loc1 dan loc2.
+  I.S. Loc1 dan loc 2 terdefinisi }
