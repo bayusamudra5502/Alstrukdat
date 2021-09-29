@@ -1,0 +1,29 @@
+KAMUS 
+  constant IDX_UNDEF: integer = -1
+  constant CAPACITY: integer = 100
+  type ElType: <id: integer, cost: integer>
+
+  { Queue dengan array statik }
+  type queue: < buffer: array [0..CAPACITY-1] of ElType, { penyimpanan elemen }
+  idxHead: integer, { indeks elemen terdepan }
+  idxTail: integer > { indeks terakhir }
+
+procedure enqueue (input/output q: queue, input val: ElType)
+  KAMUS LOKAL
+    i : integer
+
+  ALGORITMA
+    if idxHead = IDX_UNDEF then
+      q.buffer[0] <- val
+    else
+      i <- 0
+
+      while(q.buffer[i].cost <= val.cost) do
+        i <- i + 1
+      
+
+
+procedure dequeue (input/output q: queue, output val: ElType)
+  KAMUS LOKAL
+
+  ALGORITMA

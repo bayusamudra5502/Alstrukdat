@@ -1,0 +1,58 @@
+{ === SOAL 1 === }
+KAMUS 
+  constant IDX_UNDEF: integer = -1
+  constant CAPACITY: integer = 100
+  type ElType: <id: integer, cost: integer>
+
+  { Queue dengan array statik }
+  type Queue: < buffer: array [0..CAPACITY-1] of ElType, { penyimpanan elemen }
+  idxHead: integer, { indeks elemen terdepan }
+  count: integer > { jumlah elemen }
+
+function isFull(q: Queue) -> boolean
+  KAMUS LOKAL
+
+  ALGORITMA
+    -> q.count = CAPACITY
+  
+procedure enqueue(input/output q: Queue, input val: ElType)
+  KAMUS LOKAL
+
+  ALGORITMA
+    if q.count > 0 and not isFull(q) then
+      q.buffer[q.idxHead + q.count mod CAPACITY] <- val
+      q.count <- q.count + 1
+    else if q.count = 0 then
+      q.buffer[0] <- val
+      q.idxHead <- 0
+      q.count <- q.count + 1
+
+procedure dequeue (input/output q: queue, output val: ElType)
+  KAMUS LOKAL
+    idx: integer
+
+  ALGORITMA
+    idx <- (q.idxHead + q.count) mod CAPACITY
+
+    if (idx = 0) then
+      val <- q.buffer[CAPACITY - 1]
+    else
+      val <- q.buffer[idx - 1]
+    
+    count <- count - 1
+
+{ == SOAL 2 == }
+  
+procedure roundRobin (input/output q: queue, input t: integer)
+  KAMUS LOKAL
+    val: ElType
+
+  ALGORITMA
+    dequeue(q, val)
+
+    if val > T then
+      val <- val - t
+      enqueue(q, val)
+
+{ === }
+
