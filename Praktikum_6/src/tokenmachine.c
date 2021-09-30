@@ -65,7 +65,7 @@ void salinToken() {
             currentChar adalah karakter sesudah karakter terakhir yang
      diakuisisi.
             Jika panjang kata melebihi CAPACITY, maka sisa kata "dipotong" */
-  int i = 0;
+
   currentToken.val = 0;
 
   while ((currentChar != MARK) && (currentChar != BLANK)) {
@@ -76,14 +76,12 @@ void salinToken() {
     } else {
       currentToken.tkn = 'b';
 
-      while (currentChar != BLANK && !eot && i < CAPACITY) {
+      while (currentChar != BLANK && !eot) {
         currentToken.val *= 10;
         currentToken.val += toNumber(currentChar);
 
         adv();
       }
     }
-
-    i++;
   }
 }
