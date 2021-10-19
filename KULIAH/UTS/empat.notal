@@ -1,0 +1,112 @@
+{ ADT Multiset }
+
+{ 4.a. }
+type ElType: integer
+
+constant CAPACITY: integer = 100
+constant VAL_UNDEF: ElType = -1
+
+type Pair: <key: ElType, value: integer>
+
+type Multiset: <
+        buffer: Array[0..CAPACITY-1] of Pair,
+        nEff: integer
+      >
+
+{ Konstruktor }
+procedure CreateMultiset(output MS: Multiset)
+{ I.S. MS Sembarang }
+{ F.S. Membuat sebuah Multiset kosong dengan kapasitas CAPACITY.
+       Indeks dimulai dari 0
+}
+
+{ Predikat }
+function isEmpty(MS: Multiset) -> boolean
+{ Mengembalikan nilai true bila Multiset kosong }
+
+function isFull(MS: Multiset) -> boolean
+{ Mengembalikan nilai true bila Multiset penuh }
+
+function length(MS: Multiset) -> integer
+{ Mengembalikan jumlah elemen yang ada di multiset. 
+Bila ada dua elemen yang sama, maka keduanya dihitung }
+
+function bufferLength(MS: Multiset) -> integer
+{ Mengembalikan jumlah buffer yang telah terisi }
+
+{ Primmitif Map }
+procedure setKey(input key: ElType, input value: integer, input/output map: Multiset)
+{ I.S. map sudah terdefinisi dan bila key belum ada harus tidak penuh }
+{ F.S. Mengganti nilai yang ditunjuk oleh key dengan nilai val. Bila key belum
+  terdeifinisi, dibuat key baru. }
+
+procedure unsetKey(input key: ElType, input/output map: Multiset)
+{ I.S. map terdefinisi dan tidak kosong }
+{ F.S. Key dihapus dari map }
+
+function findKey(key: ElType, map: Multiset) -> integer
+{ Mengembalikan nilai yang ditunjuk oleh key. Bila tidak ada kembalikan VAL_UNDEF. }
+
+{ Primitif Add/Delete elemen }
+procedure addElmt(input val: ElType, input/output ms: Multiset)
+{ I.S. map sudah terdefinisi dan bila key belum ada, map tidak boleh penuh }
+{ F.S. Elemen el ditambahkan pada map dengan cara menambahkan 1 nilai yang ditunjuk oleh val.
+  BIla key belum ada buat baru. }
+
+procedure deleteElmt(input val: ElType, input/output ms: Multiset)
+{ I.S. val ada di ms dan ms sudah terdefinisi }
+{ F.S. Mengurangi nilai yang ditunjuk oleh key val dengan 1. Bila hasilnya 0, hapus key }
+
+{ Primitif Multiset untuk elemen }
+function isIn(val: ElType, cnt: integer, ms: Multiset) -> boolean
+{ Mengembalikan nilai True bila jumlah elemen val pada Multiset >= cnt. ms harus sudah terdefinisi }
+
+function multiplicity(val: ElType, ms: Multiset) -> integer
+{ Mengembalikan jumlah elemen val pada Multiset ms. ms harus sudah terdefinisi.
+Bila elemen tidak ada, kembalikan nilai 0 }
+
+
+{ Operasi-operasi Multiset }
+function union(m1,m2:Multiset) -> Multiset
+{ Menghasilkan hasil operasi gabungan antara m1 dan m2 }
+
+function intersection(m1, m2: Multiset) -> Multiset
+{ Menghasilkan hasil operasi irisan antara m1 dan m2 }
+
+function difference(m1, m2: Multiset) -> Multiset
+{ Menghasilkan hasil operasi pengurangan m1 - m2 }
+
+function bedaSetangkup(m1, m2: Multiset) -> Multiset
+{ Menghasilkan hasil operasi beda setangkup antara m1 dan m2 }
+
+{ Helper }
+function max(a,b: ElType) -> ElType
+{ Mengembalikan nilai maksimum antara a dan b. Bila keduanya sama,
+  kembalikan yang mana saja. }
+
+{ 4.b. }
+
+function isIn(val: ElType, cnt: integer, ms: Multiset) -> boolean
+KAMUS LOKAL
+
+ALGORITMA
+  -> multiplicity(val, ms) >= cnt
+
+function union(m1,m2:Multiset) -> Multiset
+KAMUS LOKAL
+  result : Multiset
+  tmpPair: Pair
+  i, cnt : integer
+
+ALGORITMA
+  CreateMultiset(result)
+
+  i transversal [0..bufferLength(m1)-1]
+    cnt <- max(m1.buffer[i].value, multiplicity(m1.buffer[i].key, m2))
+    setKey(m1.buffer[i].key, cnt, result)
+  
+  i transversal [0..bufferLength(m2)-1]
+    cnt <- max(m2.buffer[i].value, multiplicity(m2.buffer[i].key, result))
+    setKey(m2.buffer[i].key, cnt, result)
+  
+  -> result

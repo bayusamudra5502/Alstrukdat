@@ -1,0 +1,232 @@
+{ SOAL 1 }
+
+{ 1.a. }
+function isMatrixIdxValid(i, j: integer) → boolean
+KAMUS LOKAL
+
+ALGORITMA
+  → i < ROW_CAP and j < COL_CAP
+
+function isIdxEff (m: Matrix, i, j: integer) → boolean
+KAMUS LOKAL
+
+ALGORITMA
+  → i < getRowEff(m) and j < getCollEff(m)
+
+{ 2.b. }
+function vlookup(val: ElType, m: Matrix, col: integer) → ElType
+KAMUS LOKAL
+  i, result: integer
+
+ALGORITMA
+  i ← 0
+  result ← UNDEF
+
+  if col < getRowEff(m) then
+    while (i < getRowEff(m) and result = UNDEF) do
+      if(getElmt(m,i,0) = val) then
+          result ← getElmt(m,i,col)
+      else
+        i ← i + 1
+
+  → result
+
+{ === }
+{ Soal 2 }
+program cekKata
+
+KAMUS UMUM
+  use mesinKata1
+  constant s : string = "Opensesame"
+  constant strLen: integer = 10
+
+  state: integer
+  isValid: boolean
+
+ALGORITMA
+  startKata
+
+  if (eop) then
+    output("Pita Karakter Kosong")
+  else
+    state ← 0
+    isValid ← true
+
+    while (not eop and isValid) do
+      if(kata.buffer[0] = s[state])
+        state ← state + 1
+        advKata
+      else
+        isValid ← false
+    
+    if (isValid and state = strLen) then
+      output("Open sesame!")
+    else
+      output("Bukan pita yang tepat.")
+
+{ === }
+{ SOAL 3 }
+{ 3.a. }
+procedure enqueue(input/output Q: Queue, input val: ElType)
+KAMUS LOKAL
+i: integer
+
+ALGORITMA
+  if isEmpty(Q) then
+    Q.idxHead ← 0
+    Q.idxTail ← 0
+  else
+    if(Q.idxTail = CAPACITY - 1) then
+      i ← 0
+      i transversal [0..length(Q)-1]
+        Q.buffer[i] ← Q.buffer[i+idxHead]
+      
+      Q.idxTail ← length(Q)-1
+      Q.idxHead ← 0
+    { End if }
+    
+    Q.idxTail ← Q.idxTail + 1
+  { End if }
+
+  Q.buffer[Q.idxTail] ← val
+
+{ 3.b. }
+procedure SplitToThree (input Q : Queue, input ratio : real, output Q1, Q2, Q3: Queue)
+KAMUS LOKAL
+  lQ1 : real
+  i : integer
+  tmp: ElType
+
+ALGORITMA
+  lQ1 ← ratio * length(Q)
+  i ← 0
+
+  while(i < lQ1) do
+    dequeue(Q, tmp)
+    enqueue(Q1, tmp)
+    i ← i + 1
+
+  lQ1 ← 0.5 * length(Q)
+  i← 0
+  while(i < lQ1) do
+    dequeue(Q, tmp)
+    enqueue(Q2, tmp)
+    i ← i + 1
+  
+  while(not isEmpty(Q)) do
+    dequeue(Q,tmp)
+    enqueue(Q, Q3)
+
+{ === }
+{ ADT Multiset - SOAL 4 }
+
+{ 4.a. }
+type ElType: integer
+
+constant CAPACITY: integer = 100
+constant VAL_UNDEF: ElType = -1
+
+type Pair: <key: ElType, value: integer>
+
+type Multiset: <
+        buffer: Array[0..CAPACITY-1] of Pair,
+        nEff: integer
+      >
+
+{ Konstruktor }
+procedure CreateMultiset(output MS: Multiset)
+{ I.S. MS Sembarang }
+{ F.S. Membuat sebuah Multiset kosong dengan kapasitas CAPACITY.
+       Indeks dimulai dari 0
+}
+
+{ Predikat }
+function isEmpty(MS: Multiset) → boolean
+{ Mengembalikan nilai true bila Multiset kosong }
+
+function isFull(MS: Multiset) → boolean
+{ Mengembalikan nilai true bila Multiset penuh }
+
+function length(MS: Multiset) → integer
+{ Mengembalikan jumlah elemen yang ada di multiset. 
+Bila ada dua elemen yang sama, maka keduanya dihitung }
+
+function bufferLength(MS: Multiset) → integer
+{ Mengembalikan jumlah buffer yang telah terisi }
+
+{ Primmitif Map }
+procedure setKey(input key: ElType, input value: integer, input/output map: Multiset)
+{ I.S. map sudah terdefinisi dan bila key belum ada harus tidak penuh }
+{ F.S. Mengganti nilai yang ditunjuk oleh key dengan nilai val. Bila key belum
+  terdeifinisi, dibuat key baru. }
+
+procedure unsetKey(input key: ElType, input/output map: Multiset)
+{ I.S. map terdefinisi dan tidak kosong }
+{ F.S. Key dihapus dari map }
+
+function findKey(key: ElType, map: Multiset) → integer
+{ Mengembalikan nilai yang ditunjuk oleh key. Bila tidak ada kembalikan VAL_UNDEF. }
+
+{ Primitif Add/Delete elemen }
+procedure addElmt(input val: ElType, input/output ms: Multiset)
+{ I.S. map sudah terdefinisi dan bila key belum ada, map tidak boleh penuh }
+{ F.S. Elemen el ditambahkan pada map dengan cara menambahkan 1 nilai yang ditunjuk oleh val.
+  BIla key belum ada buat baru. }
+
+procedure deleteElmt(input val: ElType, input/output ms: Multiset)
+{ I.S. val ada di ms dan ms sudah terdefinisi }
+{ F.S. Mengurangi nilai yang ditunjuk oleh key val dengan 1. Bila hasilnya 0, hapus key }
+
+{ Primitif Multiset untuk elemen }
+function isIn(val: ElType, cnt: integer, ms: Multiset) → boolean
+{ Mengembalikan nilai True bila jumlah elemen val pada Multiset ≥ cnt. ms harus sudah terdefinisi }
+
+function multiplicity(val: ElType, ms: Multiset) → integer
+{ Mengembalikan jumlah elemen val pada Multiset ms. ms harus sudah terdefinisi.
+Bila elemen tidak ada, kembalikan nilai 0 }
+
+
+{ Operasi-operasi Multiset }
+function union(m1,m2:Multiset) → Multiset
+{ Menghasilkan hasil operasi gabungan antara m1 dan m2 }
+
+function intersection(m1, m2: Multiset) → Multiset
+{ Menghasilkan hasil operasi irisan antara m1 dan m2 }
+
+function difference(m1, m2: Multiset) → Multiset
+{ Menghasilkan hasil operasi pengurangan m1 - m2 }
+
+function bedaSetangkup(m1, m2: Multiset) → Multiset
+{ Menghasilkan hasil operasi beda setangkup antara m1 dan m2 }
+
+{ Helper }
+function max(a,b: ElType) → ElType
+{ Mengembalikan nilai maksimum antara a dan b. Bila keduanya sama,
+  kembalikan yang mana saja. }
+
+{ 4.b. }
+
+function isIn(val: ElType, cnt: integer, ms: Multiset) → boolean
+KAMUS LOKAL
+
+ALGORITMA
+  → multiplicity(val, ms) ≥ cnt
+
+function union(m1,m2:Multiset) → Multiset
+KAMUS LOKAL
+  result : Multiset
+  tmpPair: Pair
+  i, cnt : integer
+
+ALGORITMA
+  CreateMultiset(result)
+
+  i transversal [0..bufferLength(m1)-1]
+    cnt ← max(m1.buffer[i].value, multiplicity(m1.buffer[i].key, m2))
+    setKey(m1.buffer[i].key, cnt, result)
+  
+  i transversal [0..bufferLength(m2)-1]
+    cnt ← max(m2.buffer[i].value, multiplicity(m2.buffer[i].key, result))
+    setKey(m2.buffer[i].key, cnt, result)
+  
+  → result

@@ -1,0 +1,51 @@
+{ SOAL 3 }
+{ 3.a. }
+procedure enqueue(input/output Q: Queue, input val: ElType)
+KAMUS LOKAL
+i: integer
+
+ALGORITMA
+  if isEmpty(Q) then
+    Q.idxHead <- 0
+    Q.idxTail <- 0
+  else
+    if(Q.idxTail = CAPACITY - 1) then
+      i <- 0
+      i transversal [0..length(Q)-1]
+        Q.buffer[i] <- Q.buffer[i+idxHead]
+      
+      Q.idxTail <- length(Q)-1
+      Q.idxHead <- 0
+    { End if }
+    
+    Q.idxTail <- Q.idxTail + 1
+  { End if }
+
+  Q.buffer[Q.idxTail] <- val
+
+{ 3.b. }
+procedure SplitToThree (input Q : Queue, input ratio : real, output Q1, Q2, Q3: Queue)
+KAMUS LOKAL
+  lQ1 : real
+  i : integer
+  tmp: ElType
+
+ALGORITMA
+  lQ1 <- ratio * length(Q)
+  i <- 0
+
+  while(i < lQ1) do
+    dequeue(Q, tmp)
+    enqueue(Q1, tmp)
+    i <- i + 1
+
+  lQ1 <- 0.5 * length(Q)
+  i<- 0
+  while(i < lQ1) do
+    dequeue(Q, tmp)
+    enqueue(Q2, tmp)
+    i <- i + 1
+  
+  while(not isEmpty(Q)) do
+    dequeue(Q,tmp)
+    enqueue(Q, Q3)

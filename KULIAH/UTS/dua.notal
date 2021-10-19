@@ -1,0 +1,31 @@
+{ Soal 2 }
+program cekKata
+
+KAMUS UMUM
+  use mesinKata1
+  constant s : string = "Opensesame"
+  constant strLen: integer = 10
+
+  state: integer
+  isValid: boolean
+
+ALGORITMA
+  startKata
+
+  if (eop) then
+    output("Pita Karakter Kosong")
+  else
+    state <- 0
+    isValid <- true
+
+    while (not eop and isValid) do
+      if(kata.buffer[0] = s[state])
+        state <- state + 1
+        advKata
+      else
+        isValid <- false
+    
+    if (isValid and state = strLen) then
+      output("Open sesame!")
+    else
+      output("Bukan pita yang tepat.")

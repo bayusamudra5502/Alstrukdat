@@ -1,0 +1,39 @@
+program evaluasiMath
+
+KAMUS
+  use MesinKar1
+  use Stack
+
+  type ElType = integer
+
+  s: Stack
+  val1, val2: integer
+
+function isOperator() -> boolean
+{ I.S. currentKata tak kosong, kata sudah diakuisisi }
+{ F.S. Mengeluarkan True bila currentKata adalah operator }
+
+function toInt() -> integer
+{ I.S. currentKata tak kosong, kata sudah diakuisisi }
+{ F.S. mengembalikan bentuk integer dari kata }
+
+function evaluate(val1, val2: integer)
+{ I.S. currentKata tak kosong, kata sudah diakuisisi dan isOperator() = true }
+{ F.S. mengembalikan bentuk integer dari kata }
+
+ALGORITMA
+  startKata
+
+  while(not endKata) do
+    if isOperator() then
+      pop(s, val2)
+      pop(s, val1)
+      push(s, evaluate(val1, val2))
+    else
+      push(toInt())
+    
+    advKata
+
+  pop(s, val1)
+  output(val1)
+

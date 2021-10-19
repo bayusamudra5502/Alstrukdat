@@ -1,0 +1,62 @@
+procedure copyStack(input sIn: Stack, output sOut: Stack)
+{ Membuat salinan sOut }
+{ I.S. sIn terdefinisi, sOut sembarang }
+{ F.S. sOut berisi salinan sIn yang identik }
+
+KAMUS LOKAL
+  tmp : Stack
+  val : ElType
+
+ALGORITMA
+  while(not isEmpty(sIn)) do
+    pop(sIn, val)
+    push(tmp, val)
+  
+  while(not isEmpty(tmp)) do
+    pop(tmp, val)
+    push(sOut, val)
+
+procedure inverseStack(input/output s: Stack)
+{ Membalik isi suatu stack }
+{ I.S. s terdefinisi }
+{ F.S. Isi s terbalik dari posisi semula }
+
+KAMUS LOKAL
+  tmp1, tmp2: Stack
+  val: ElType
+
+ALGORITMA
+  while(not isEmpty(s)) do
+    pop(s, val)
+    push(tmp1, val)
+  
+  while(not isEmpty(tmp1)) do
+    pop(tmp1, val)
+    push(tmp2, val)
+  
+  while(not isEmpty(tmp2)) do
+    pop(tmp2, val)
+    push(s, val)
+
+function mergeStack(s1,s2: Stack) → Stack
+{ Menghasilkan sebuah stack yang merupakan hasil penggabungan s1
+dengan s2 dengan s1 berada di posisi lebih “bawah”. Urutan kedua
+stack harus sama seperti aslinya. }
+{ Stack baru diisi sampai seluruh elemen s1 dan s2 masuk ke dalam
+stack, atau jika stack baru sudah penuh, maka elemen yang
+dimasukkan adalah secukupnya yang dapat ditampung. }
+
+KAMUS LOKAL
+  tmp : Stack
+  val: ElType
+
+ALGORITMA
+  while(not isEmpty(s2)) do
+    pop(s2, val)
+    push(tmp, val)
+  
+  while(not isEmpty(val)) do
+    pop(tmp, val)
+    push(s1, val)
+  
+  -> s1

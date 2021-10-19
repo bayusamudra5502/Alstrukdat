@@ -1,0 +1,47 @@
+KAMUS
+const CAPACITY: integer = ...
+typr ElType: integer
+
+type Set: < buffer: array[0..CAPACITY-1] of ElType,
+          length: integer >
+
+procedure add(input/output s: Set, input val: ElType)
+KAMUS LOKAL
+  i,l,r : integer
+  found: boolean
+
+ALGORITMA
+  l <- 0
+  r <- s.length
+  found <- false
+
+  while(l < r && not found) do
+    if(s.buffer[(l+r) div 2] = val) then
+      found <- true
+    else if(s.buffer[(l+r) div 2] > val) then
+      l = (l + r + 1) div 2
+    else
+      r = (l + r) div 2
+
+  if (not found) then
+    i tranversal [s.length..l]
+      s.buffer[i] <- s.buffer[i-1]
+    
+    s.buffer[l] <- val
+    s.length <- s.length + 1
+
+procedure add(input/output s: Set, input val: ElType)
+KAMUS LOKAL
+  i: integer
+
+ALGORITMA
+  i <- 0
+
+  if(not isIn(s, val)) then
+    s.buffer[s.length] <- val
+    s.length <- s.length + 1
+
+function isIn(s: Set, val: ElType) -> boolean
+KAMUS LOKAL
+
+ALGORITMA

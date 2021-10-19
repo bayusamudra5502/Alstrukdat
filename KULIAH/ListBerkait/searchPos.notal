@@ -1,0 +1,28 @@
+function searchPos(l: List) -> address
+KAMUS LOKAL
+  p : address
+
+ALGORITMA
+  p <- l
+
+  while(p != nil and p^.info <= 0) do
+      p <- p^.next
+  
+  -> p
+
+function countPos(l: List) -> integer
+KAMUS LOKAL
+  cnt: integer
+  p: address
+
+ALGORITMA
+  cnt <- 0
+  p <- l
+
+  while (p != NIL) do
+    if p^.info > 0 then
+      cnt <- cnt + 1
+    
+    p <- p^.next
+  
+  -> cnt

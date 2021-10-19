@@ -1,0 +1,32 @@
+{ SOAL 1 }
+
+{ 1.a. }
+function isMatrixIdxValid(i, j: integer) → boolean
+KAMUS LOKAL
+
+ALGORITMA
+  → i < ROW_CAP and j < COL_CAP
+
+function isIdxEff (m: Matrix, i, j: integer) → boolean
+KAMUS LOKAL
+
+ALGORITMA
+  → i < getRowEff(m) and j < getCollEff(m)
+
+{ 2.b. }
+function vlookup(val: ElType, m: Matrix, col: integer) → ElType
+KAMUS LOKAL
+  i, result: integer
+
+ALGORITMA
+  i ← 0
+  result ← UNDEF
+
+  if col < getRowEff(m) then
+    while (i < getRowEff(m) and result = UNDEF) do
+      if(getElmt(m,i,0) = val) then
+          result ← getElmt(m,i,col)
+      else
+        i ← i + 1
+
+  → result
