@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "*.js": "javascript",
+    "test.h": "c",
+    "matrix.h": "c",
+    "stack.h": "c"
+  }
+}

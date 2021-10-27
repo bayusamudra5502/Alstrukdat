@@ -5,4 +5,4 @@ for i in range(99):
 
 print("#")
 
-print("100#")
+print("1#")

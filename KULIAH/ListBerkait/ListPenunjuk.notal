@@ -1,0 +1,51 @@
+KAMUS
+
+type List = <
+    first: address
+    last: address
+  >
+
+type Eltype = integer
+
+
+procedure insertFirst(input/output l:List, input x:ElType)
+KAMUS LOKAL
+  node : address
+ALGORITMA
+  CreateNode(node)
+
+  if node != NIL then
+    if isEmpty(l) then
+      l.last <- node
+      
+    node^.info <- x
+    node^.next <- l.first
+    l.first <- node
+
+
+procedure insertLast(input/output l:List, input x: Eltype)
+KAMUS LOKAL
+  node: address
+ALGORITMA
+  if isEmpty(l) then
+    insertFirst(l,x)
+  else
+    CreateNode(node)
+
+    if node != NIL then
+      node^.info <- x
+      
+      (l.last)^.next <- node
+      l.last <- node
+
+function search(l: List, x:Eltype) -> boolean
+KAMUS LOKAL
+  p: address
+
+ALGORITMA
+  p <- l.first
+
+  while(not isDummy(p)) do
+    p <- p^.next
+
+  -> p != l.last

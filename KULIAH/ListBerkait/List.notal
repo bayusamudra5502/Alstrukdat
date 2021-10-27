@@ -1,0 +1,9 @@
+procedure deleteNeg(input/output L: List)
+KAMUS LOKAL
+  p, plast: address
+ALGORITMA
+  p <- l
+  pLast <- NIL
+
+  while(p != NIL) do
+    if(p^.info)

@@ -1,0 +1,11 @@
+{
+  "tasks": [
+    {
+      "label": "buildTest",
+      "type": "shell",
+      "command": "make",
+      "args": ["./bin/test"]
+    }
+  ],
+  "version": "2.0.0"
+}
