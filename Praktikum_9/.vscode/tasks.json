@@ -1,0 +1,17 @@
+{
+  "tasks": [
+    {
+      "label": "buildTest",
+      "type": "shell",
+      "command": "make",
+      "args": ["./bin/test"]
+    },
+    {
+      "label": "buildCache",
+      "type": "shell",
+      "command": "make",
+      "args": ["./bin/cache"]
+    }
+  ],
+  "version": "2.0.0"
+}
