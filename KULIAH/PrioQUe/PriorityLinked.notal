@@ -1,0 +1,74 @@
+type Node: < info: ElType, prio: integer, next: Address>
+type PrioQUeue: < first: Address >
+
+{ Memperioritaskan prio lebih kecil }
+
+procedure enqueue(input/output pq: PrioQueue, 
+        input prio : integer, 
+        input value: ElType)
+  KAMUS LOKAL
+    p, pl: Address  
+    n: Address
+
+  ALGORITMA 
+    n <- createNode(prio, value)
+
+    if(n != NIL) then
+      if isEmpty(pq) then
+        pq.first <- n
+      else
+        p <- pq.first
+        pl <- NIL
+
+        while(p != NIL and p^.prio <= prio) do
+          pl <- p
+          p <- p^.next
+        
+        n^.next <- p
+
+        if (pl != NIL) then
+          pl^.next <- n
+        else
+          pq.first <- n
+
+----
+
+{ Double Linked }
+type Node: < info: ElType, prio: integer, next: Address, prev: Address>
+
+procedure enqueue(input/output pq: PrioQueue, 
+        input prio : integer, 
+        input value: ElType)
+  KAMUS LOKAL
+    p, pl: Address  
+    n: Address
+
+  ALGORITMA 
+    n <- createNode(prio, value)
+
+    if(n != NIL) then
+      if isEmpty(pq) then
+        pq.first <- n
+        p^.next <- NIL
+      else
+        p <- pq.first
+        
+        while (p^.next != NIL and p^.prio <= prio) do
+          p <- p^.next
+        
+        if (p^.prio <= prio) then
+          { Insert last }
+          p^.next <- n
+          n^.prev <- p
+        else
+          { P.prio > prio }
+          n^.next <- p
+          n^.prev <- p^.prev
+
+          if p^.prev != NIL then
+            (p^.prev)^.next <- n
+          else
+            pq.first <- n
+
+          p^.prev <- n
+

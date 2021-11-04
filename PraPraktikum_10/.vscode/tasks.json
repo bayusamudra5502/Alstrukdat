@@ -1,0 +1,29 @@
+{
+  "tasks": [
+    {
+      "label": "buildTest",
+      "type": "shell",
+      "command": "make",
+      "args": ["./bin/test"]
+    },
+    {
+      "label": "buildCache",
+      "type": "shell",
+      "command": "make",
+      "args": ["./bin/cache"]
+    },
+    {
+      "label": "buildListDp",
+      "type": "shell",
+      "command": "make",
+      "args": ["./bin/list_dp"]
+    },
+    {
+      "label": "buildListCircular",
+      "type": "shell",
+      "command": "make",
+      "args": ["./bin/list_circular"]
+    }
+  ],
+  "version": "2.0.0"
+}
