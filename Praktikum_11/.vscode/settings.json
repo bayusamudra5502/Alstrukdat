@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "*.js": "javascript",
+    "list_circular.h": "c"
+  }
+}

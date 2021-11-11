@@ -1,0 +1,68 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Jalanin Test",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/test",
+      "args": ["-tno-fork"],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "buildTest"
+    },
+    {
+      "name": "Jalanin List DP",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/list_dp",
+      "args": ["-tno-fork"],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "buildListDp"
+    },
+    {
+      "name": "Jalanin List Circular",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/list_circular",
+      "args": ["-tno-fork"],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "buildListCircular"
+    }
+  ]
+}
