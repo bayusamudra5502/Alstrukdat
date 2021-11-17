@@ -1,0 +1,11 @@
+{
+  "tasks": [
+    {
+      "label": "buildListRec",
+      "type": "shell",
+      "command": "make",
+      "args": ["./bin/listrec"]
+    }
+  ],
+  "version": "2.0.0"
+}
