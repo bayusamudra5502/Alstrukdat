@@ -1,0 +1,23 @@
+function bSearch(p: BinTree, x: ElType) -> boolean
+{ Mengembalikan true bila x terdapat di BST P.
+  Asumsi : operator and adalah operator short circuit }
+KAMUS LOKAL
+
+ALGORITMA
+  if (p.info = x) then
+    -> true
+  else if(p.info < x) then
+    -> p.left != NIL and bSearch(p.left, x)
+  else
+    -> p.right != NIL  and bSearch(p.right, x)
+
+function buildBST (infos: array[0..99] of integer, nEff: integer) → BinTree
+KAMUS LOKAL
+  p: BinTree
+  i: integer
+ALGORITMA
+  i <- 1
+  createTree(array[0], NIL, NIL, p)
+
+  i traversal [0..nEff-1]
+    

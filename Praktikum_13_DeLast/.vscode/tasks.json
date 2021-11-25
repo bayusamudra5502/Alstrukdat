@@ -1,0 +1,23 @@
+{
+  "tasks": [
+    {
+      "label": "buildListRec",
+      "type": "shell",
+      "command": "make",
+      "args": ["./bin/bintree"]
+    },
+    {
+      "label": "buildMerkle",
+      "type": "shell",
+      "command": "make",
+      "args": ["./bin/merkle"]
+    },
+    {
+      "label": "buildInvert",
+      "type": "shell",
+      "command": "make",
+      "args": ["./bin/invert"]
+    }
+  ],
+  "version": "2.0.0"
+}

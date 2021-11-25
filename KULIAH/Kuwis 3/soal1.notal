@@ -1,0 +1,143 @@
+{ SOAL 1 }
+{ Asumsi selektor bisa berperan sebagai getter sekaligus setter }
+
+function searchX (L: List, X: infotype) -> address
+KAMUS LOKAL
+  p: address
+  isFound : boolean
+
+ALGORITMA
+  p <- First(L)
+  isFound <- false
+
+  while (p != NIL and not isFound) do
+    if INFO(p) != X then
+      isFound <- true
+    else
+      p <- NEXT(p)
+
+  -> p
+
+procedure insertUnik (input/output L: List, input X: infotype)
+KAMUS LOKAL
+  p,n: address
+  max: infotype
+
+ALGORITMA
+  p <- searchX(L, X)
+
+  if (p == NIL) then
+    n <- newNode(X)
+
+    if n != NIL then
+      NEXT(n) <- FIRST(L)
+      FIRST(L) <- n
+
+procedure mergeList (input L1, L2: List, output L3: List)
+KAMUS LOKAL
+  p,p2: address
+  tmp: infotype
+
+ALGORITMA
+  CreateList(L3)
+
+  p <- FIRST(L1)
+  while(p != NIL) do
+    insertUnik(L3, INFO(p))
+    p <- NEXT(p)
+  
+  p <- FIRST(L2)
+  while(p != NIL) do
+    insertUnik(L3, INFO(p))
+    p <- NEXT(p)
+
+{ Soal 2 }
+{ 2.a. Definisi dan Spsifikasi Soal Candi}
+
+{ Struktur data }
+constant MAX_ELEMENT: integer = 1000
+
+type Candi: <nama: string, sisa_waktu: integer, waktu_proses: integer>
+type Node: <data: Candi, next: Address>
+type ListCandi: <
+        first: node,
+        last: node
+      >
+type Address: pointer to Node
+
+{ Konstruktor Node }
+function createNode(value: Candi) -> Address
+{ Mengembalikan alamat dari node yang terbentuk. Bila proses
+  pembuatan gagal, mengembalikan NIL }
+
+{ Selektor Node }
+{ Jika P adalah address, maka }
+{   nama(P) setara dengan P^.nama }
+{   sisa_waktu(P) setara dengan P^.sisa_waktu }
+{   waktu_proses(P) setara dengan P^.waktu_proses }
+{   next(P) setara dengan P^.next }
+{ Artinya selektor bisa berperan sebagai getter maupun setter }
+
+{ List }
+{ Konstruktor }
+procedure CreateListCandi(output L:ListCandi)
+{ I.S. Sembarang ListCandi
+  F.S. Mengembalikan list candi kosong, yaitu memiliki length = 0 dan
+       first bernilai Nil }
+
+{ Selektor }
+{ Jika L adalah list maka }
+{   First(L) setara dengan L^.first }
+{   Last(L) setara dengan L^.last }
+{ Artinya selektor bisa berperan sebagai getter maupun setter }
+
+function isEmpty(L: ListCandi) -> boolean
+{ Mengembalikan nilai true bila list telah kosong }
+
+function length(L: ListCandi) -> integer
+{ Mengembalikan jumlah elemen dari list }
+
+procedure insertCandi(input/output L: ListCandi,  input el : Candi)
+{ I.S. Candi telah terdefinisi }
+{ F.S.  jika masih kosong, set first dn last ke node baru dan next dari node tersebut
+        menunjuk pada dirinya sendiri.
+        Tambahkan elemen baru di akhir list dan ganti last serta next dari node
+        baru menunjuk ke first }
+
+procedure deleteCandi(input/output L: ListCandi, input pDel: Address)
+{ I.S. ListCandi Tidak kosong dan pDel ada di list }
+{ F.S. Node pDel terhapus dari list }
+
+procedure isiListCandi(input/output L: ListCandi)
+{ I.S. List sudah diinisialisasi }
+{ F.S. ListCandi diisi seusai dengan inputan user. Jumlah data yang
+       diambil adalahh 1000 candi }
+
+function alokasi(size: integer) -> pointer
+{ Mengembalikan alamat dari alokasi memori. Memberikan nilai NIl
+  bila alokasi gagal }
+
+procedure dealokasi(p: pointer)
+{ Dealokasi pointer p }
+
+{ Soal 2b. }
+procedure deleteCandi(input/output L: ListCandi, input pDel: Address)
+  KAMUS LOKAL
+    p: address
+
+  ALGORITMA
+    if(pDel = First(L)) then
+      next(last(L)) <- next(pDel)
+      First(L) <- next(pDel)
+      dealokasi(pDel)
+    else
+      p <- First(L)
+
+      while (next(p) != pDel) do
+        p <- next(p)
+      
+      if pDel = LAST(L) then
+        LAST(L) <- p
+      
+      next(p) <- First(L)
+      dealokasi(pDel)

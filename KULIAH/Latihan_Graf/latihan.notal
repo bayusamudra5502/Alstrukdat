@@ -1,0 +1,65 @@
+constant NIL: ...
+type AdrNode: pointer to Node
+type AdrSuccNode: pointer to SuccNode
+type Node: < id: integer, {identitas simpul}
+    nPred: integer, {jumlah busur yang masuk ke simpul = jumlah simpul pred}
+    trail: AdrSuccNode, {pointer ke list trailer (simpul successor)}
+    next: AdrNode >
+
+type SuccNode: < succ: AdrNode, {address simpul successor}
+                next: AdrSuccNode >
+
+type Graph: < first: AdrNode >
+
+function searchNode(g: Graph, x: integer) -> AdrNode
+{ mengembalikan address simpul dengan id=x jika sudah ada pada graph g,
+NIL jika belum }
+
+KAMUS LOKAL
+  p: AdrNode
+
+ALGORITMA
+  p <- g.first
+
+  while(p != NIL and p^.id != x) do
+    p <- p^.next
+
+  -> p
+
+function searchEdge (g: Graph, prec: integer, succ: integer) → adrSuccNode
+{ mengembalikan address trailer yang menyimpan info busur <prec,succ>
+jika sudah ada pada graph g, NIL jika belum }
+
+KAMUS LOKAL
+  p: AdrNode
+  pt: AdrSuccNode
+
+ALGORITMA
+  p <- searchNode(g, prec)
+  pt <- p^.trail
+
+  while(pt != NIL and pt^.succ == succ) do
+    pt <- pt^.next
+
+  -> pt
+
+procedure insertNode (input/output g: Graph, input x: integer, output pn: adrNode)
+{ Menambahkan simpul x ke dalam graph g, jika alokasi x berhasil. }
+{ I.S. g terdefinisi, x terdefinisi dan belum ada pada g. }
+{ F.S. Jika alokasi berhasil, x menjadi elemen terakhir g, pn berisi
+       address simpul x. Jika alokasi gagal, g tetap, pn berisi NIL }
+KAMUS LOKAL
+
+ALGORITMA
+  n <- newGraphNode(x)
+  
+  if (n != NIL) then
+    p <- g.first
+
+    if p == NIL then
+      g.first <- n
+    else
+      while(p^.next != NIL) do
+        p <- p^.next
+      
+      p^.next <- n
