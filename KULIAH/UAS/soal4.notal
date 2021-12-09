@@ -1,0 +1,68 @@
+{ Soal 4. }
+
+{ Asumsi :
+  * Selektor dapat langsung dipakai walaupun menggunakan pointer.
+    Misalkan, Nama(PMgr) artinya PMgr^.Nama
+}
+
+{ Bagian 4.a. }
+
+function portofolio(FirstMgr:ListMgr, 
+    FirstFC:ListFC, FirstContract:ListContract, Mgr: string) -> real
+KAMUS LOKAL
+  cntFootballClub, cntManager: integer
+  ptrContract: adrCt
+  ptrFC: adrFC
+  cnt: integer
+
+ALGORITMA
+  cntFootballClub <- 0
+  ptrFC <- FirstFC
+
+  while(ptrFC != NIL) do
+    cntFootballClub <- cntFootballClub + 1
+    ptrFC <- NextFC(ptrFC)
+
+  ptrContract <- FirstContract
+  cntManager <- 0
+
+  while(ptrContract != NIL) do
+    if(Nama(PMgr(ptrContract)) == Mgr) then
+      cntManager <- cntManager + 1
+    
+    ptrContract <- NextContract(ptrContract)
+  
+  if(cntFootballClub > 0) then
+    -> cntManager / cntFootballClub
+  else
+    { Asumsi : Kasus tidak ada Footbal Club mengembalikan 0 }
+    -> 0
+  
+
+{ Bagian 4.b. }
+function isAlumni(FirstMgr:ListMgr, FirstFC:ListFC,
+    FirstContract:ListContract, M1: string, M2: string) -> boolean
+KAMUS LOKAL
+  isFound: boolean
+  ptrContract, ptrContractFinder: adrCt
+  fcAdrTmp: adrFC
+
+ALGORITMA
+  isFound <- false
+  ptrContract <- FirstContract
+
+  while (not isFound and ptrContract != NIL) do
+    if Nama(PMgr(ptrContract)) = M1 then
+      fcAdrTmp <- PFC(ptrContract)
+      ptrContractFinder <- NextContract(ptrContract)
+
+      while(not isFound and ptrContractFinder != NIL) do
+        if fcAdrTmp = PFC(ptrContractFinder) and
+          Nama(PMgr(ptrContractFinder)) = M2 then
+          isFound <- true
+        else
+          ptrContractFinder <- NextContract(ptrContractFinder)
+    
+    ptrContract <- NextContract(ptrContract)
+  
+  -> isFound

@@ -1,0 +1,55 @@
+{ Soal 1. }
+
+{ Bagian 1.a. }
+function isKelipatanX(L: List, x: integer) -> boolean
+KAMUS LOKAL
+
+ALGORITMA
+  { Basis }
+  if INFO(L) % x != 0 then
+    -> false 
+  else if (isOneElmt(L)) then
+    -> true
+  else
+    { Rekurens }
+    -> isKelipatanX(NEXT(L), x)
+
+{ Bagian 1.b. }
+function sortedMerge(L1, L2: List) -> List
+KAMUS LOKAL
+  Ltmp: List
+  node: address
+
+ALGORITMA
+  if (not isEmpty(L1) and not isEmpty(L2)) then
+    if INFO(L1) >= INFO(L2) then
+      Ltmp <- sortedMerge(NEXT(L1), L2)
+      node <- newNode(INFO(L1))
+    else
+      Ltmp <- sortedMerge(L1, NEXT(L2))
+      node <- newNode(INFO(L2))
+    
+    NEXT(node) <- Ltmp
+    -> node
+  else if (isEmpty(L1))
+    -> copyList(L2)
+  else
+    -> copyList(L1)
+
+{ Bagian 1.c. }
+procedure deleteAlternate(input/output L: List, input isOdd: boolean)
+KAMUS LOKAL
+  node: address
+
+ALGORITMA
+  if isEmpty(L) then
+    -> L
+  else
+    node <- L
+    deleteAlternate(NEXT(node), not isOdd)
+
+    if isOdd then
+      L <- NEXT(node)
+      dealokasi(node)
+    else
+      L <- node

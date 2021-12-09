@@ -1,0 +1,118 @@
+{ Soal 3. }
+
+{ Bagian 3.a. }
+procedure tambahTeman(input/output G: Graph, 
+                  input siA, siB: string)
+KAMUS LOKAL
+  adrSiA, adrSiB: adrOrang
+  nodeTeman, nodeOrang: adrTeman
+  gagalAlokasi: boolean
+
+ALGORITMA
+  adrSiA <- cariOrang(G, siA)
+  adrSiB <- cariOrang(G, siB)
+  gagalAlokasi <- false
+
+  { Penambahan teman siA }
+  if adrSiA != NIL then
+    { Kasus siA ada }
+    nodeTeman <- newTeman(Nama(siB))
+
+    if nodeTeman != NIL then
+      Next(nodeTeman^) <- Teman(adrSiA^)
+      Teman(adrSiA^) <- nodeTeman
+    else
+      gagalAlokasi <- true
+  else
+    { Kasus siA belum ada }
+    nodeOrang <- newOrang(siA)
+
+    if nodeOrang != NIL then
+      nodeTeman <- newTeman(Nama(siB))
+
+      if nodeTeman != NIL then
+        Next(nodeTeman^) <- Teman(nodeOrang$)
+        Teman(nodeOrang^) <- nodeTeman
+
+        Next(nodeOrang^) <- G.first
+        G.first <- nodeOrang
+        adrSiA <- nodeOrang
+      else
+        gagalAlokasi <- true
+        dealokOrang(nodeOrang)
+    else
+      gagalAlokasi <- true
+  
+  { Penambahan Teman di si B }
+  if not gagalAlokasi then
+    if adrSiB != NIL then
+        nodeTeman <- newTeman(Nama(siA))
+
+      if nodeTeman != NIL then
+        Next(nodeTeman^) <- Teman(adrSiB^)
+        Teman(adrSiB^) <- nodeTeman
+      else
+        nodeTeman <- Teman(adrSiA^)
+        Teman(adrSiA^) <- Next(nodeTeman^)
+        dealokTeman(nodeTeman)
+    else
+      { Kasus siB belum ada }
+      nodeOrang <- newOrang(siB)
+
+      if nodeOrang != NIL then
+        nodeTeman <- newTeman(Nama(siA))
+
+        if nodeTeman != NIL then
+          Next(nodeTeman^) <- Teman(nodeOrang)
+          Teman(nodeOrang) <- nodeTeman
+
+          Next(nodeOrang^) <- G.first
+          G.first <- Next(nodeOrang^)
+        else
+          gagalAlokasi <- true
+
+      else
+         gagalAlokasi <- true
+
+      { Dealokasi karena gagal }
+      if gagalAlokasi then
+        nodeTeman <- Teman(adrSiA^)
+        Teman(adrSiA^) <- Next(nodeTeman^)
+        dealokTeman(nodeTeman)
+
+        if nodeOrang != NIL then
+          dealokOrang(nodeOrang)
+
+{ Bagian 3.b. }
+function apakahBerteman(G: Graph, siX: string) -> boolean
+KAMUS LOKAL
+  adrSiX: adrOrang
+  adrTemanX: adrTeman
+  isFound: boolean
+  namaGaul: string
+
+ALGORITMA
+  adrSiA <- cariOrang(G, siX)
+  
+  if adrSiA == NIL then
+    -> false
+  else
+    namaGaul <- palingGaul(G)
+    adrTemanX <- Teman(adrSiA^)
+    isFound <- false
+    
+    while (adrTemanx != NIL and not isFound) do
+      if(Nama(adrTemanX^) = namaGaul) then
+        isFound <- true
+      else
+        adrTeman <- Next(adrTeman^)
+    
+    -> isFound
+
+{ Bagian 3.c. }
+Untuk soal ini, sebenarnya penggunaan struktur data graf ini kurang begitu tepat karena
+terjadi dua buah nama setiap pertemanan. Struktur yang lebih tepat untuk mengakali kekurangan
+ini, kita dapat membuat sebuah graf yang menyimpan sisi (yang menyatakan hubungan pertemanan) 
+dengan dua buah List, yaitu `hubunganPertemanan` dan `Orang`. List `Orang` berisikan nama-nama 
+orang, sedangkan list `hubunganPertemanan` berisi pasangan address dua buah orang yang saling
+berteman satu sama lainnya.

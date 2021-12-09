@@ -5,7 +5,7 @@ type List = <
     last: address
   >
 
-type Eltype = integer
+type ElType = integer
 
 
 procedure insertFirst(input/output l:List, input x:ElType)

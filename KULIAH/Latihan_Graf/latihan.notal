@@ -37,7 +37,7 @@ KAMUS LOKAL
 ALGORITMA
   p <- searchNode(g, prec)
   pt <- p^.trail
-
+  
   while(pt != NIL and pt^.succ == succ) do
     pt <- pt^.next
 

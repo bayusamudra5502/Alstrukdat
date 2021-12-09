@@ -1,6 +1,6 @@
 KAMUS
 const CAPACITY: integer = ...
-typr ElType: integer
+type ElType: integer
 
 type Set: < buffer: array[0..CAPACITY-1] of ElType,
           length: integer >

@@ -1,0 +1,56 @@
+{ Soal 2. }
+
+{ Bagian 2.a. }
+function sumAllWeight(P: BinTree) -> integer
+KAMUS LOKAL
+  sumLeft, sumRight: integer
+
+ALGORITMA
+  if isTreeEmpty(P) then
+    -> 0
+  else
+    sumLeft <- sumAllWeight(Left(P))
+    sumRight <- sumAllWeight(Right(P))
+
+    -> Weight(P) * Count(P) + sumLeft + sumRight
+
+{ Bagian 2.b. }
+function maxOccurence(P: BinTree) -> BinTree
+KAMUS LOKAL
+  maxLeft, maxRight, max: BinTree
+  maxCnt: integer
+
+ALGORITMA
+  if isTreeOneElmt(P) then
+    -> P
+  else if isUnerLeft(P) then
+    maxLeft <- maxOccurence(Left(P))
+
+    if Count(maxLeft) > Count(P) or 
+        (Count(maxLeft) = Count(P) and Weight(maxLeft) > Weight(P)) then
+      -> maxLeft
+    else
+      -> P
+  else  if isUnerRight(P) then
+    maxRight <- maxOccurence(Right(P))
+
+    if Count(maxRight) > Count(P) or 
+        (Count(maxRight) = Count(P) and Weight(maxRight) > Weight(P)) then
+      -> maxLeft
+    else
+      -> P
+  else
+    maxLeft <- maxOccurence(Left(P))
+    maxRight <- maxOccurence(Right(P))
+    max <- P
+
+    if Count(maxRight) > Count(max) or 
+        (Count(maxRight) = Count(max) and Weight(maxRight) > Weight(max)) then
+      max <- maxRight
+    
+    if Count(maxLeft) > Count(max) or 
+        (Count(maxLeft) = Count(max) and Weight(maxLeft) > Weight(max)) then
+      max <- maxLeft
+    
+    -> max
+
